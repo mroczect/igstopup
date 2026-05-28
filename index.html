@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <title>Kalkulator Pinjaman | Pencairan Bersih</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="glass-background"></div>
+    <div class="container">
+      <div class="glass-card">
+        <div class="header">
+          <div class="badge">
+            <i class="fas fa-chart-line"></i> Simulasi presisi • tanpa nilai
+            bawaan
+          </div>
+          <h1>Kalkulator Pencairan Pinjaman</h1>
+          <p class="subhead">
+            Dana bersih setelah asuransi, pajak, diskon & denda
+          </p>
+          <div class="formula-pill">
+            <i class="fas fa-square-root-alt"></i>
+            <code
+              >Total = (Pokok − (Angsuran × Sisa)) − (1.5% Pokok) − Pajak +
+              Diskon − Denda</code
+            >
+          </div>
+        </div>
+
+        <div class="input-grid">
+          <div class="input-pane">
+            <label><i class="fas fa-coins"></i> Pinjaman pokok</label>
+            <div class="input-wrapper">
+              <span class="prefix">Rp</span>
+              <input
+                type="text"
+                id="pinjaman"
+                class="currency-input"
+                value="0"
+              />
+            </div>
+            <div class="helper">
+              <i class="fas fa-sliders-h"></i>
+              <input
+                type="range"
+                id="pinjamanSlider"
+                class="slider"
+                min="0"
+                max="500000000"
+                step="1000000"
+              />
+            </div>
+          </div>
+
+          <div class="input-pane">
+            <label><i class="fas fa-calendar-alt"></i> Angsuran / bulan</label>
+            <div class="input-wrapper">
+              <span class="prefix">Rp</span>
+              <input
+                type="text"
+                id="angsuran"
+                class="currency-input"
+                value="0"
+              />
+            </div>
+            <div class="helper">Besar cicilan tetap per bulan</div>
+          </div>
+
+          <div class="input-pane">
+            <label><i class="fas fa-hourglass-half"></i> Sisa angsuran</label>
+            <div class="input-wrapper">
+              <input
+                type="number"
+                id="sisaAngsuran"
+                class="number-input"
+                value="0"
+                step="1"
+                min="0"
+              />
+              <span class="suffix">kali</span>
+            </div>
+            <div class="helper">Jumlah cicilan tersisa</div>
+          </div>
+
+          <div class="input-pane">
+            <label><i class="fas fa-exclamation-triangle"></i> Denda</label>
+            <div class="input-wrapper">
+              <span class="prefix">Rp</span>
+              <input type="text" id="denda" class="currency-input" value="0" />
+            </div>
+            <div class="helper">Potongan keterlambatan</div>
+          </div>
+
+          <div class="input-pane">
+            <label><i class="fas fa-tag"></i> Diskon / bonus</label>
+            <div class="input-wrapper">
+              <span class="prefix">Rp</span>
+              <input type="text" id="diskon" class="currency-input" value="0" />
+            </div>
+            <div class="helper">Pengurang potongan</div>
+          </div>
+
+          <div class="input-pane">
+            <label
+              ><i class="fas fa-shield-alt"></i> Asuransi (1.5%)
+              <span class="auto-tag">auto</span></label
+            >
+            <div class="input-wrapper readonly-bg">
+              <span class="prefix">Rp</span>
+              <input
+                type="text"
+                id="asuransi"
+                class="readonly-input"
+                readonly
+                value="0"
+              />
+            </div>
+            <div class="helper">Pinjaman × 1.5%</div>
+          </div>
+
+          <div class="input-pane">
+            <label
+              ><i class="fas fa-file-invoice-dollar"></i> Pajak / adm</label
+            >
+            <div class="input-wrapper">
+              <span class="prefix">Rp</span>
+              <input type="text" id="pajak" class="currency-input" value="0" />
+            </div>
+            <div class="helper">Materai, adm, dll</div>
+          </div>
+
+          <div class="input-pane total-pane">
+            <label
+              ><i class="fas fa-hand-holding-usd"></i> Total didapat
+              (bersih)</label
+            >
+            <div class="input-wrapper">
+              <span class="prefix">Rp</span>
+              <input
+                type="text"
+                id="totalDidapat"
+                class="readonly-input total-highlight"
+                readonly
+                value="0"
+              />
+            </div>
+            <div class="helper">
+              <i class="fas fa-check-circle"></i> Jumlah final diterima
+            </div>
+          </div>
+        </div>
+
+        <div class="action-bar">
+          <button id="resetBtn" class="btn-glass">
+            <i class="fas fa-undo-alt"></i> Reset ke 0
+          </button>
+          <button id="copyBtn" class="btn-glass">
+            <i class="fas fa-copy"></i> Salin hasil
+          </button>
+          <button id="printBtn" class="btn-glass">
+            <i class="fas fa-print"></i> Cetak / PDF
+          </button>
+        </div>
+
+        <footer>
+          <i class="fas fa-calculator"></i> (Pinjaman - Angsuran×Sisa) - Asuransi(1.5% Pokok) - Pajak + Diskon - Denda
+          <span> • </span> Format Rupiah: <strong>Rp 1.000.000,00</strong>
+          <br>
+          <span style="font-size: 0.85rem; opacity: 0.95;">
+            <i class="fab fa-github"></i> Dibuat oleh 
+            <a href="https://github.com/mroczect" target="_blank" style="color: #a5f0ff; text-decoration: none;">Muhammad Riduwan Khafidi</a>
+          </span>
+        </footer>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
